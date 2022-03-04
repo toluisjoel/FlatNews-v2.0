@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+
+{% block content %}
+<form style="padding-top:100px" action="." method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <input action="{% url 'blog:home' %}"type="submit" value='submit'>
+</form>
+{% endblock %}

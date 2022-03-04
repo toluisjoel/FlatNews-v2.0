@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+{% load static %}
+{% block title %}Blog Posts{% endblock %}
+{% block content %}
+
+<section id="content" class="s-content">
+
+<div class="hero">
+    <div class="hero__slider swiper-container">
+        <div class="swiper-wrapper">
+            <article class="hero__slide swiper-slide">
+                <div class="hero__entry-image" style="background-image: url('/Users/toelu/Downloads/$GENERAL_PROJECT/DJANGO_BLOG-APP/static/images/featured-01_2000.jpg')"></div>
+                <div class="hero__entry-text">
+                    <div class="hero__entry-text-inner">
+                        <div class="hero__entry-meta">
+                            <span class="cat-links">
+                                <a href="">Welcome Note</a>
+                            </span>
+                        </div>
+                        <h2 class="hero__entry-title">
+                            <p href="#">Cliche? propably not this blog.</p>
+                        </h2>
+                        <p class="hero__entry-desc">FlatNews is a website you publish your articles and also get latest news update. Our writers are unique and you will enjoy every bit of their work. Scroll down and click on a topic of interest.</p>
+                        <a class="hero__more-link" href="https://twitter.com/x_toelu">MADE BY TOLU JOEL</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    <a href="#bricks" class="hero__scroll-down smoothscroll"><svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.25 6.75L4.75 12L10.25 17.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 12H5"></path></svg><span>Scroll</span></a>
+</div>
+
+</section> 
+{% include "blog/post_list_view.html"%}
+{% include "blog/pagination.html" with page=posts %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "main.html"%}
+{% block content %}
+<div class="tags-header-balance">
+<div class="s-pageheader">
+    <div class="row">
+        <div class="column large-12">
+            <h1 class="page-title">
+                <span class="page-title__small-type">Category:</span>
+                {{tag.name.capitalize}}
+            </h1>
+        </div>
+    </div>
+</div>
+{% include "blog/post_list_view.html" with posts=object_list %}
+{% endblock %}

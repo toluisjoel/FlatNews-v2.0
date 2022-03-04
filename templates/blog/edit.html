@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block footer %}<!---->{% endblock %}
+{% block title %}Edit Post{% endblock %}
+{% block content %}
+
+<h1>Edit Your {{title.capitalize}}</h1>
+ <form  class='edit_delete_form' method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p}}
+        <input type="submit" value="Edit {{title}}">
+    </form>
+{% endblock %}

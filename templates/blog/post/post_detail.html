@@ -28,9 +28,9 @@
                             <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 17.25V9.75C19.25 8.64543 18.3546 7.75 17.25 7.75H4.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25H17.25C18.3546 19.25 19.25 18.3546 19.25 17.25Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 7.5L12.5685 5.7923C12.2181 5.14977 11.5446 4.75 10.8127 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V11"></path>
                             </svg> 
                             <span class="cat-links">
-                                {% for tag in post.tags.all %}
-                                <a href="{% url 'blog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
-                                {% endfor %}
+                                <!-- {% for tag in post.tags.all %}
+                                <a href=>{{ tag.name }}</a>
+                                {% endfor %} -->
                             </span>
                         </div>
 
@@ -57,9 +57,9 @@
                         <p class="entry__tags">
                             <strong>Tags:</strong>
                             <span class="entry__tag-list">
-                                {% for tag in post.tags.all %}
-                                <a href="{% url 'blog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
-                                {% endfor %}
+                                <!-- {% for tag in post.tags.filter %}
+                                <a href="">{{ tag.name }}</a>
+                                {% endfor %} -->
                             </span>
                         </p>
 
@@ -81,13 +81,13 @@
                 <a href="{{ post.post_detail_content }}">{{post.title}}</a><hr>
             {% endfor %}
 
-            <!-div class="comments-wrap">
+            <div class="comments-wrap">
 
                 <div id="comments">
                     <div class="large-12">
                         <h3>{% with comments.count as total_comments %} {{total_comments}} comment{{total_comments | pluralize}}</h3>{% if total_comments == 0 %} <p>Be the first to comment</p> {% endif %} {% endwith %}
                         <ol class="commentlist">
-                            {% for comment in comments %}
+                            {% for comment in post.comments.all %}
                             <li class="depth-1 comment">
                                 <div class="comment__avatar">
                                     <img class="avatar" src="{{comment.author.profile.profile_picture.url}}" alt="" width="50" height="50">
@@ -114,15 +114,15 @@
                 <div class="comment-respond">
                     <div id="respond">
                         <h3>Add Comment</h3>
-                        <form method="POST" action=".">{% csrf_token %}
-                            <div class="comment-field-tolu">{{comment_form}}</div>
+                        <form method="POST" action="">{% csrf_token %}
+                            <div class="comment-field-tolu">{{form.as_p}}</div>
                             <input class="btn btn--primary btn-wide btn--large u-fullwidth" value="Add Comment" type="submit">
                         </form>
                     </div>
                 </div>
                 {% else %}<button><a href="{% url 'account:login' %}">Login to comment</a></button>{% endif %}
 
-            </!-div>
+            </div>
 
         </div>
     </div>

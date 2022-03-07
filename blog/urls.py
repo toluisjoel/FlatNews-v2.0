@@ -4,13 +4,12 @@ from . import views
 app_name = 'blog'
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
-    path('create-post/', views.create_post, name='create_post'),
-    path('tag/<slug:tag_slug>', views.home, name='post_list_by_tag'),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
-    path('edit-comment/<str:pk>', views.edit_comment, name='edit_comment'),
-    path('delete-comment/<str:pk>', views.delete_comment, name='delete_comment'),
-    path('edit-post/<str:pk>', views.edit_post, name='edit_post'),
-    path('delete-post/<str:pk>', views.delete_post, name='delete_post'),
+    path('', views.PostListView.as_view(), name='home'),
+    path('<published_date>/<slug>/<str:pk>', views.PostDetailView.as_view(), name='post_detail'),
+    path('create-post/', views.CreatePostView.as_view(), name='create_post'),
+    # path('tag/<slug:tag_slug>', views.Tags.as_view(), name='post_list_by_tag'),
+    path('edit-comment/<str:pk>', views.EditCommentView.as_view(), name='edit_comment'),
+    path('delete-comment/<str:pk>', views.DeleteCommentView.as_view(), name='delete_comment'),
+    path('edit-post/<str:pk>', views.EditPostView.as_view(), name='edit_post'),
+    path('delete-post/<str:pk>', views.DeletePostView.as_view(), name='delete_post'),
 ]

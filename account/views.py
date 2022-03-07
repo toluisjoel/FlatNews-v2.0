@@ -62,5 +62,4 @@ class DeleteView(generic.DeleteView):
 def post_manager(request):
     published_posts = Post.published.filter(author=request.user)
     draft_posts = Post.draft.filter(author=request.user)
-    return render(request, 'blog/post/post_manager.html',
-                  {'published_posts': published_posts, 'draft_posts': draft_posts})
+    return render(request, 'blog/post/post_manager.html', {'published_posts': published_posts, 'draft_posts': draft_posts})

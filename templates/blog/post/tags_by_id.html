@@ -1,4 +1,5 @@
 {% extends "main.html"%}
+{% block title %}{{tag.name}} posts{% endblock %}
 {% block content %}
 <div class="tags-header-balance">
 <div class="s-pageheader">
@@ -6,10 +7,10 @@
         <div class="column large-12">
             <h1 class="page-title">
                 <span class="page-title__small-type">Category:</span>
-                {{tag.name.capitalize}}
+                {{post.tag.name.capitalize}}
             </h1>
         </div>
     </div>
 </div>
-{% include "blog/post_list_view.html" with posts=object_list %}
+{% include "blog/post_list_view.html"%}
 {% endblock %}

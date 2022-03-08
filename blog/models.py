@@ -3,7 +3,7 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 from django.urls import reverse
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
 
 
 class PublishedManager(models.Manager):
@@ -19,7 +19,7 @@ class DraftManager(models.Manager):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=220)
-    body = HTMLField()
+    body = RichTextField()
     thumbnail = models.ImageField(upload_to='post_thumbnails/%Y/%m/%d/')
     quote_author = models.CharField(blank=True, max_length=20)
     post_quote = models.CharField(blank=True, max_length=300)

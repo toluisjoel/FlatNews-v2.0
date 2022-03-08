@@ -1,5 +1,6 @@
 {% extends "main.html" %}
-
+{% block title %}Creat Post{% endblock %}
+{% block footer %}<!---->{% endblock %}
 {% block content %}
 <form style="padding-top:100px" action="." method="POST" enctype="multipart/form-data">
     {% csrf_token %}

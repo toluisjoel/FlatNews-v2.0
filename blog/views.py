@@ -1,9 +1,12 @@
-from  django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.text import slugify
-from .models import Post, Comment
-from django.urls import reverse_lazy
 from django.views.generic.edit import  DeleteView, UpdateView, CreateView
-from django.views.generic import DetailView, ListView
+from  django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView
+from django.utils.text import slugify
+from django.urls import reverse_lazy
+from django.db.models import Count
+from .models import Post, Comment
 from .forms import CommentForm
 
 
@@ -25,15 +28,27 @@ class PostListView(ListView):
     template_name = 'blog/post/post_list.html'
 
 
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/post/post_detail.html'
+@login_required
+def post_detail(request, published_date, slug, pk):
+    post = get_object_or_404(Post, published_date=published_date, slug=slug, id=pk)
+    comments = post.comments.filter(active=True)
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.author = request.user
+            new_comment.post = post
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    # list of similar posts
+    post_tags_id = post.tags.values_list('id', flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_id).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-tags', '-published_date')[:6]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(body=self.object)
-        context['form'] = CommentForm()
-        return context
+    context = {'post': post, 'comment_form': comment_form, 'new_comment': new_comment, 'comments': comments,'similar_posts': similar_posts}
+    return render(request, 'blog/post/post_detail.html', context)
 
 
 class EditPostView(LoginRequiredMixin, UpdateView):

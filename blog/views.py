@@ -29,7 +29,6 @@ class PostListView(ListView):
     template_name = 'blog/post/post_list.html'
 
 
-@login_required
 def post_detail(request, published_date, slug, pk):
     post = get_object_or_404(Post, published_date=published_date, slug=slug, id=pk)
     comments = post.comments.filter(active=True)

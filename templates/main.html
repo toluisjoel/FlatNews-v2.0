@@ -2,17 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- =============== # BASIC PAGE NEEDS =============== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
-    </script> 
+    </script>
+    <!-- =============== # FAVICONS =============== -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon_io/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">
-
+    <!-- =============== # CSS =============== -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
     <link href="{% static 'css/content.min.css' %}" rel="stylesheet"> 
@@ -50,26 +52,7 @@
             </ul>
         </nav> 
     </div>
-
-    <div class="s-header__search">
-        <div class="s-header__search-inner">
-            <div class="row">
-                <form role="search" method="get" class="s-header__search-form" action=".">
-                    <label>
-                        <span class="u-screen-reader-text">Search for:</span>
-                        <input type="search" class="s-header__search-field" placeholder="Search for..." value="" name="query" title="Search for:" autocomplete="off">
-                    </label>
-                    <input type="submit" class="s-header__search-submit" value="Search"> 
-                </form>
-                <a href="#" title="Close Search" class="s-header__search-close">Close</a>
-            </div>
-        </div> 
-    </div>
-    
     <a class="s-header__menu-toggle" href="#"><span>Menu</span></a>
-    <a class="s-header__search-trigger" href="#">
-        <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"></path></svg></a>
-
 </header>
 
 {% block content %}
@@ -97,12 +80,10 @@
             </div>
         </div>
     </div>
-
     <div class="ss-go-top">
         <a class="smoothscroll" title="Back to Top" href="#top">
             <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 10.25L12 4.75L6.75 10.25"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.25V5.75"/></svg></a>
     </div>
-
 </footer>
 {% endblock %}
 

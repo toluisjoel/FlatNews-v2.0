@@ -25,6 +25,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 class PostListView(ListView):
     model = Post
     object_list = Post.published.all()
+    paginate_by = 12
     template_name = 'blog/post/post_list.html'
 
 

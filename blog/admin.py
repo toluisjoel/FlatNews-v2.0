@@ -9,6 +9,8 @@ class CommentInline(admin.StackedInline):
 
 
 class PostAdmin(admin.ModelAdmin):
+    list_display = ('title','status','author',)
+    list_filter = ('status','created_at')
     inlines =[
         CommentInline,
     ]

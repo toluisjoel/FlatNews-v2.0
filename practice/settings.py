@@ -140,8 +140,16 @@ LOGOUT_URL = 'account:logout'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Mailjet 
+EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+EMAIL_HOST = 'in-v3.mailjet.com'
+MAILJET_API_KEY = env.str("MAILJET_API_KEY")
+MAILJET_API_SECRET = env.str("MAILJET_API_SECRET")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_TIMEOUT = 30
 
 CKEDITOR_CONFIGS = {
     'default': {

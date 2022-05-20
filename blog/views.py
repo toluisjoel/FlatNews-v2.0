@@ -1,10 +1,11 @@
 from django.views.generic.edit import  DeleteView, UpdateView, CreateView
 from  django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from django.utils.text import slugify
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.db.models import Count
 from .models import Post, Comment
 from .forms import CommentForm
@@ -40,6 +41,7 @@ def post_detail(request, published_date, slug, pk):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
+            return HttpResponseRedirect(reverse('blog:post_detail', args=(published_date, slug, pk)))
     else:
         comment_form = CommentForm()
     # list of similar posts
@@ -72,7 +74,9 @@ class EditCommentView(UpdateView):
     success_url = reverse_lazy('blog:home')
 
 
-class DeleteCommentView(DeleteView):
+class DeleteCommentView(DeleteView, UserPassTest):
     model = Comment
     template_name = 'blog/delete.html'
-    success_url = reverse_lazy('blog:home')
+
+    # def get_success_url(self) -> str:
+    #     return reverse('blog:post_detail', args=(self.post.published_date, self.post.slug, self.post.id))

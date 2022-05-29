@@ -36,13 +36,14 @@ class Post(models.Model):
     draft = DraftManager()
 
     def post_detail_content(self):
-        return reverse('blog:post_detail', args=[self.published_date, self.slug, self.id ])
+        return reverse('blog:post_detail', args=[self.published_date, self.slug, self.id])
 
     class Meta:
         ordering = ('-published_date',)
 
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='comments', null=True)
